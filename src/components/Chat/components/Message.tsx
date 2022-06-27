@@ -1,9 +1,14 @@
 import type { ChatModelState } from '@/models/chat'
 import { connect } from 'umi'
+import React, { useRef } from 'react'
+import { useScroll } from 'ahooks'
+import Empty from './Empty'
 
 const Message = (props: { chat: ChatModelState }) => {
     console.log(props, 'message')
+    const ref = useRef(null)
     const { chat, dispatch, user } = props
+    const messageEle = document.getElementById('message')
     const SendMessage = () => {
         const s = document.getElementById('send')
         if (s.value == '') {
@@ -14,12 +19,21 @@ const Message = (props: { chat: ChatModelState }) => {
             payload: s?.value,
         })
         s.value = ''
-    }
-    const msgList = chat.people.filter((e) => e.userId == chat.selectId)
-    console.log(msgList, 'msgList')
 
+        setTimeout(() => {
+            try {
+                messageEle.scrollTop = messageEle.scrollHeight
+            } catch {}
+        }, 200)
+    }
+
+    const msgList = chat.people.filter((e) => e.userId == chat.selectId)
+    const userinfo = chat.people.find((e) => e.userId == chat.selectId)
+    if (chat.selectId == '') {
+        return <Empty />
+    }
     return (
-        <div className="container flex flex-col">
+        <div className="flex h-full flex-col">
             {/* 目标信息 */}
             <div className="border-solid border-b-2 border-light-blue-500 p-4 flex gap-8">
                 <img
@@ -27,10 +41,14 @@ const Message = (props: { chat: ChatModelState }) => {
                     alt=""
                     className="h-8 w-8 rounded-full"
                 />
-                {props.chat.selectId}
+                {userinfo?.name}
             </div>
             {/* 消息显示 */}
-            <div className="flex-1 p-4 flex-col flex gap-8 overflow-y-scroll max-h-96">
+            <div
+                id="message"
+                className="flex-1 p-4 flex-col flex gap-8 overflow-y-scroll max-h-96 transition-all"
+                ref={ref}
+            >
                 {msgList[0] &&
                     msgList[0].msg.map((e) => (
                         <div className="flex-none">
@@ -53,7 +71,7 @@ const Message = (props: { chat: ChatModelState }) => {
                                     />
                                 </div>
                                 <div
-                                    className={`max-w-xs break-words align-baseline rounded shadow-xl p-2  ${
+                                    className={` break-words  max-w-xs align-baseline rounded shadow-xl p-3  ${
                                         e.id != chat.selectId
                                             ? 'bg-yellow-300'
                                             : ' '
