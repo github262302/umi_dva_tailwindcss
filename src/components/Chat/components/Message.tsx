@@ -1,6 +1,6 @@
 import type { ChatModelState } from '@/models/chat'
 import { connect } from 'umi'
-import React, { useRef } from 'react'
+import React, { useEffect, useRef } from 'react'
 import { useScroll } from 'ahooks'
 import Empty from './Empty'
 
@@ -19,16 +19,20 @@ const Message = (props: { chat: ChatModelState }) => {
             payload: s?.value,
         })
         s.value = ''
-
-        setTimeout(() => {
-            try {
-                messageEle.scrollTop = messageEle.scrollHeight
-            } catch {}
-        }, 200)
+        SeeBottom()
     }
-
+    const SeeBottom= ()=>{  setTimeout(() => {
+        try {
+            messageEle.scrollTop = messageEle.scrollHeight
+        } catch {}
+    }, 200)}
     const msgList = chat.people.filter((e) => e.userId == chat.selectId)
     const userinfo = chat.people.find((e) => e.userId == chat.selectId)
+  
+    useEffect( () =>{
+        SeeBottom()
+        return ()=>{}
+    },[])
     if (chat.selectId == '') {
         return <Empty />
     }

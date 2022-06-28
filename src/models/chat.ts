@@ -46,7 +46,7 @@ const ChatModel: ChatModelType = {
                     type: "string"
                 }, {
                     msg: "鸡你太美",
-                    id: "fsd",
+                    id: "fsdqjqwekhqk",
                     type: "string"
                 }, {
                     msg: "???",
@@ -79,8 +79,8 @@ const ChatModel: ChatModelType = {
         sendState: false,
         peopleList: [
             { name: "元气酱", userId: "fsdqjqwekhqk", sex: "男", image: "https://gimg2.baidu.com/image_search/src=http%3A%2F%2Fup.enterdesk.com%2Fedpic%2F4d%2F63%2Fbd%2F4d63bd0b3bf8cc9aa0dc3e1111646b1c.jpeg&refer=http%3A%2F%2Fup.enterdesk.com&app=2002&size=f9999,10000&q=a80&n=0&g=0n&fmt=auto?sec=1658942654&t=dcd388bee7e18f3b50e6b48bea66c175" },
-            { name: "王老板", userId: "fsdqjkfsdfhqk", sex: "男", image: "https://img2.baidu.com/it/u=2860188096,638334621&fm=253&fmt=auto&app=138&f=JPEG?w=500&h=500" },
-            { name: "可口可乐", userId: "fsdqqwejkhqk", sex: "男", image: "https://img1.baidu.com/it/u=1960292808,1761809160&fm=253&fmt=auto&app=138&f=JPEG?w=500&h=500" },
+            { name: "王老板", userId: "123dfg", sex: "男", image: "https://img2.baidu.com/it/u=2860188096,638334621&fm=253&fmt=auto&app=138&f=JPEG?w=500&h=500" },
+            { name: "可口可乐", userId: "65123f", sex: "男", image: "https://img1.baidu.com/it/u=1960292808,1761809160&fm=253&fmt=auto&app=138&f=JPEG?w=500&h=500" },
             { name: "大杀四方", userId: "fsdergqjkhqk", sex: "男", image: "https://img1.baidu.com/it/u=1007132089,966890415&fm=253&fmt=auto&app=138&f=JPEG?w=500&h=500" },
             { name: "孤勇者", userId: "fsdqjkdfghqk", sex: "男", image: "https://img0.baidu.com/it/u=1533706996,3150334193&fm=253&fmt=auto&app=138&f=JPEG?w=500&h=500" },
             { name: "爱你孤身", userId: "fsdqfsdjkhqk", sex: "男", image: "https://img0.baidu.com/it/u=3151595625,804030088&fm=253&fmt=auto&app=138&f=JPEG?w=500&h=500" },
