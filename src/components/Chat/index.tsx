@@ -8,7 +8,7 @@ import People from './components/People'
 import PeopleInfo from './components/PeopleInfo'
 
 const App = (props: { chat: ChatModelState }) => {
-    const { chat, dispatch } = props
+    const { chat, dispatch, user } = props
     return (
         <div className={styles.main}>
             <div
@@ -17,13 +17,7 @@ const App = (props: { chat: ChatModelState }) => {
                 <div className="bg-indigo-400 p-8 ">
                     <ul className=" gap-8 flex flex-col h-full">
                         <li className="text-white cursor-pointer">
-                            <img
-                                src={
-                                    'https://images.unsplash.com/photo-1500648767791-00dcc994a43e?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=facearea&facepad=2&w=256&h=256&q=80'
-                                }
-                                alt=""
-                                className="h-8 w-8"
-                            />
+                            <img src={user.image} alt="" className="h-8 w-8" />
                         </li>
                         <li
                             className="text-white cursor-pointer"
@@ -106,6 +100,7 @@ const App = (props: { chat: ChatModelState }) => {
         </div>
     )
 }
-export default connect(({ chat }: { chat: ChatModelState }) => ({
+export default connect(({ chat, user }: { chat: ChatModelState }) => ({
     chat,
+    user,
 }))(App)

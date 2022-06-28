@@ -7,6 +7,20 @@ export default () => {
     return (
         <div className={styles.main}>
             <img className={styles.car} src={big} />
+            <div className="absolute left-1/2 animate-bounce bottom-10">
+                <svg
+                    xmlns="http://www.w3.org/2000/svg"
+                    className="h-5 w-5 text-gray-100"
+                    viewBox="0 0 20 20"
+                    fill="currentColor"
+                >
+                    <path
+                        fillRule="evenodd"
+                        d="M16.707 10.293a1 1 0 010 1.414l-6 6a1 1 0 01-1.414 0l-6-6a1 1 0 111.414-1.414L9 14.586V3a1 1 0 012 0v11.586l4.293-4.293a1 1 0 011.414 0z"
+                        clipRule="evenodd"
+                    />
+                </svg>
+            </div>
         </div>
     )
 }
