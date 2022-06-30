@@ -21,18 +21,20 @@ const Message = (props: { chat: ChatModelState }) => {
         s.value = ''
         SeeBottom()
     }
-    const SeeBottom= ()=>{  setTimeout(() => {
-        try {
-            messageEle.scrollTop = messageEle.scrollHeight
-        } catch {}
-    }, 200)}
+    const SeeBottom = () => {
+        setTimeout(() => {
+            try {
+                messageEle.scrollTop = messageEle.scrollHeight
+            } catch {}
+        }, 200)
+    }
     const msgList = chat.people.filter((e) => e.userId == chat.selectId)
     const userinfo = chat.people.find((e) => e.userId == chat.selectId)
-  
-    useEffect( () =>{
+
+    useEffect(() => {
         SeeBottom()
-        return ()=>{}
-    },[])
+        return () => {}
+    }, [])
     if (chat.selectId == '') {
         return <Empty />
     }

@@ -51,7 +51,12 @@ const Search = () => {
                         />
                     </svg>
                 </div>
-                <input type="text" name="price" id="price" />
+                <input
+                    className="w-full pl-8"
+                    type="text"
+                    name="price"
+                    id="price"
+                />
             </div>
         </div>
     )
