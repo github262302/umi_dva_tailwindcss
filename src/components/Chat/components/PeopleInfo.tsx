@@ -19,7 +19,7 @@ const App = (props: { chat: ChatModelState }) => {
     return (
         <div className="relative">
             <animated.div
-                className="grid place-items-center h-full w-full"
+                className="grid place-items-center h-full w-full mt-24"
                 style={{
                     position: 'absolute',
                     ...styles,

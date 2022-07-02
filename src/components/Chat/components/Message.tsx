@@ -1,27 +1,36 @@
 import type { ChatModelState } from '@/models/chat'
 import { connect } from 'umi'
-import React, { useEffect, useRef } from 'react'
+import React, { useEffect, useRef, useState } from 'react'
 import { useScroll } from 'ahooks'
 import Empty from './Empty'
+import Popconfirm from '@/components/Popconfirm'
 
 const Message = (props: { chat: ChatModelState }) => {
-    console.log(props, 'message')
+    const [put, setPut] = useState(false)
+    const [emoji, setEmoji] = useState(false)
     const ref = useRef(null)
     const { chat, dispatch, user } = props
     const messageEle = document.getElementById('message')
     const SendMessage = () => {
-        const s = document.getElementById('send')
-        if (s.value == '') {
-            return
-        }
-        dispatch({
-            type: 'chat/sendMsg',
-            payload: s?.value,
-        })
-        s.value = ''
-        SeeBottom()
+        setPut(true)
+        setTimeout(() => {
+            const s = document.getElementById('send')
+            if (s.value == '') {
+                setPut(false)
+                return
+            }
+
+            dispatch({
+                type: 'chat/sendMsg',
+                payload: s?.value,
+            })
+            s.value = ''
+            SeeBottom()
+            setPut(false)
+        }, 1000)
     }
     const SeeBottom = () => {
+        console.log('show')
         setTimeout(() => {
             try {
                 messageEle.scrollTop = messageEle.scrollHeight
@@ -30,7 +39,9 @@ const Message = (props: { chat: ChatModelState }) => {
     }
     const msgList = chat.people.filter((e) => e.userId == chat.selectId)
     const userinfo = chat.people.find((e) => e.userId == chat.selectId)
-
+    const Upload = () => {
+        document.getElementById('upload')?.click()
+    }
     useEffect(() => {
         SeeBottom()
         return () => {}
@@ -92,24 +103,28 @@ const Message = (props: { chat: ChatModelState }) => {
             {/* 输入框 */}
             <div className="h-1/5 flex flex-col">
                 <div>
+                    {/* 工具栏 */}
                     <ul className="divide-y flex gap-4 p-2">
-                        <li className="cursor-pointer">
-                            <svg
-                                xmlns="http://www.w3.org/2000/svg"
-                                className="h-6 w-6"
-                                fill="none"
-                                viewBox="0 0 24 24"
-                                stroke="currentColor"
-                                strokeWidth={2}
-                            >
-                                <path
-                                    strokeLinecap="round"
-                                    strokeLinejoin="round"
-                                    d="M14.828 14.828a4 4 0 01-5.656 0M9 10h.01M15 10h.01M21 12a9 9 0 11-18 0 9 9 0 0118 0z"
-                                />
-                            </svg>
+                        <li className="cursor-pointer relative">
+                            <Popconfirm content={<>开发中</>}>
+                                <svg
+                                    xmlns="http://www.w3.org/2000/svg"
+                                    className="h-6 w-6"
+                                    fill="none"
+                                    viewBox="0 0 24 24"
+                                    stroke="currentColor"
+                                    strokeWidth={2}
+                                >
+                                    <path
+                                        strokeLinecap="round"
+                                        strokeLinejoin="round"
+                                        d="M14.828 14.828a4 4 0 01-5.656 0M9 10h.01M15 10h.01M21 12a9 9 0 11-18 0 9 9 0 0118 0z"
+                                    />
+                                </svg>
+                            </Popconfirm>
                         </li>
                         <li className="cursor-pointer">
+                            <input type="file" id="upload" className="hidden" />
                             <svg
                                 xmlns="http://www.w3.org/2000/svg"
                                 className="h-6 w-6"
@@ -117,6 +132,7 @@ const Message = (props: { chat: ChatModelState }) => {
                                 viewBox="0 0 24 24"
                                 stroke="currentColor"
                                 strokeWidth={2}
+                                onClick={Upload}
                             >
                                 <path
                                     strokeLinecap="round"
@@ -147,13 +163,30 @@ const Message = (props: { chat: ChatModelState }) => {
                     <textarea
                         placeholder="请输入信息"
                         id="send"
-                        className="h-full w-full p-2"
+                        className="  h-full w-full p-2  "
                         style={{ resize: 'none', outline: 'none' }}
                     />
                     <div
                         onClick={SendMessage}
-                        className="rounded-md absolute absolute bottom-4 right-12 bg-yellow-300 text-white px-4 py-1 cursor-pointer text-black"
+                        className="rounded-md flex absolute absolute bottom-4 right-12 bg-yellow-300 text-white px-4 py-1 cursor-pointer text-black"
                     >
+                        {put && (
+                            <svg
+                                xmlns="http://www.w3.org/2000/svg"
+                                className="h-6 w-6 animate-spin"
+                                fill="none"
+                                viewBox="0 0 24 24"
+                                stroke="currentColor"
+                                strokeWidth={2}
+                            >
+                                <path
+                                    className=""
+                                    strokeLinecap="round"
+                                    strokeLinejoin="round"
+                                    d="M5.636 18.364a9 9 0 010-12.728m12.728 0a9 9 0 010 12.728m-9.9-2.829a5 5 0 010-7.07m7.072 0a5 5 0 010 7.07M13 12a1 1 0 11-2 0 1 1 0 012 0z"
+                                />
+                            </svg>
+                        )}
                         Send
                     </div>
                 </div>

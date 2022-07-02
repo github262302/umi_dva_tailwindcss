@@ -10,12 +10,12 @@ import PeopleInfo from './components/PeopleInfo'
 const App = (props: { chat: ChatModelState }) => {
     const { chat, dispatch, user } = props
     return (
-        <div className={styles.main}>
+        <div className={`${styles.main} bg-gray-100`}>
             <div
-                className={`container h-5/6 flex shadow-lg rounded-md ${styles.broad} `}
+                className={`bg-white  container  flex shadow-lg rounded-xl ${styles.broad} `}
             >
-                <div className="bg-indigo-400 p-8 ">
-                    <ul className=" gap-8 flex flex-col h-full">
+                <div className="rounded-tl-xl rounded-bl-xl  bg-indigo-400 p-8 ">
+                    <ul className="gap-8 flex flex-col h-full">
                         <li className="text-white cursor-pointer">
                             <img src={user.image} alt="" className="h-8 w-8" />
                         </li>

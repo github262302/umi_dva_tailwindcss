@@ -52,7 +52,7 @@ const Search = () => {
                     </svg>
                 </div>
                 <input
-                    className="w-full pl-8"
+                    className="w-full pl-8 rounded-xl form-input"
                     type="text"
                     name="price"
                     id="price"

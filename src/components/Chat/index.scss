@@ -4,7 +4,12 @@
     width: 100vw;
     display: grid;
     place-items: center;
+
 }
+$bw:976px;
 .broad{
 
+aspect-ratio: 10/6;
+min-width: $bw;
+width: $bw;
 }

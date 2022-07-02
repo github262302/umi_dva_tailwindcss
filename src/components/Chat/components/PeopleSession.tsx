@@ -5,7 +5,12 @@ const People = (props: { chat: ChatModelState }) => {
     console.log(props)
     const { dispatch, chat } = props
     const LastMsg = (id: string): string => {
-        return 'ffsdfsdfffff'
+        let res = chat.people.find((e) => e.userId == id)
+        if (res?.msg.length == 0) {
+            return ''
+        }
+        let str = res?.msg[res.msg.length - 1].msg
+        return str
     }
     const setPs = (id: string) => {
         dispatch({
@@ -30,7 +35,7 @@ const People = (props: { chat: ChatModelState }) => {
                         <p className="text-sm font-medium text-gray-900">
                             {person.name}
                         </p>
-                        <p className="text-sm text-gray-500">
+                        <p className="text-sm text-gray-500 truncate ...">
                             {LastMsg(person.userId)}
                         </p>
                     </div>
