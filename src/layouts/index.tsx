@@ -3,7 +3,14 @@ import { Link, Outlet } from 'umi'
 import styles from './index.less'
 
 export default function Layout() {
-    const data = ['Mac', 'Phone', 'Ipad', 'Watch', '商店']
+    const data = ['Home', 'Chat', 'Todo']
+    const LinkTo = (num: number) => {
+        console.log('top')
+        const main = document.getElementById('main')
+        const To = (main.scrollHeight / 3) * num
+
+        main?.scrollTo(0, To)
+    }
     return (
         <div className="">
             <div
@@ -12,9 +19,12 @@ export default function Layout() {
                 }
             >
                 <ul className=" flex gap-8">
-                    {data.map((e) => (
-                        <li className="border-solid border-1 border-purple-400 rounded-full h-8 mx-2 text-black-200">
-                            <Link to="/">{e}</Link>
+                    {data.map((e, index) => (
+                        <li
+                            onClick={() => LinkTo(index)}
+                            className="border-solid border-1 border-purple-400 rounded-full h-8 mx-2 text-black-200"
+                        >
+                            {e}
                         </li>
                     ))}
                 </ul>

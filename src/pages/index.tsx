@@ -5,7 +5,7 @@ import scssStyles from './index.scss'
 import Chat from '@/components/Chat'
 export default function HomePage() {
     return (
-        <div className={scssStyles.main}>
+        <div className={scssStyles.main} id="main">
             <div className={scssStyles.section}>
                 <Car />
             </div>

@@ -80,6 +80,7 @@ const App = (props: { chat: ChatModelState }) => {
                                 viewBox="0 0 24 24"
                                 stroke="currentColor"
                                 strokeWidth={2}
+                                onClick={() => alert('敬请期待!')}
                             >
                                 <path
                                     strokeLinecap="round"

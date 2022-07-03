@@ -1,5 +1,10 @@
 .msg{
-    &::-webkit-scrollbar{}
-    &::-webkit-scrollbar-thumb{}
+    &::-webkit-scrollbar{
+        width: 2px;
+        background-color: rgb(181, 181, 181);
+    }
+    &::-webkit-scrollbar-thumb{
+        background-color: rgb(255, 255, 255);
+    }
     &::-webkit-scrollbar-track{}
 }

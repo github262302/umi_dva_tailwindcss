@@ -6,6 +6,7 @@ type singleMsg = {
     msg: string
     id: string
     type: string
+    read: number
 }
 
 export interface MsgList {
@@ -20,6 +21,7 @@ export interface PoepleSingle {
     sex: string
     image: string
 }
+
 export interface ChatModelState {
     people: Array<MsgList>
     selectId: string
@@ -38,20 +40,25 @@ const ChatModel: ChatModelType = {
     state: {
         people: [
             {
-                name: "元气酱",
+                name: "大卫",
                 userId: "fsdqjqwekhqk",
                 msg: [{
                     msg: "您好",
                     id: "my",
-                    type: "string"
+                    type: "string",
+                    read: 1
                 }, {
                     msg: "鸡你太美",
                     id: "fsdqjqwekhqk",
-                    type: "string"
+                    type: "string", read: 1
                 }, {
                     msg: "???",
                     id: "my",
-                    type: "string"
+                    type: "string", read: 1
+                }, {
+                    msg: "不懂吗",
+                    id: "fsdqjqwekhqk",
+                    type: "string", read: 0
                 }],
                 image: "https://gimg2.baidu.com/image_search/src=http%3A%2F%2Fup.enterdesk.com%2Fedpic%2F4d%2F63%2Fbd%2F4d63bd0b3bf8cc9aa0dc3e1111646b1c.jpeg&refer=http%3A%2F%2Fup.enterdesk.com&app=2002&size=f9999,10000&q=a80&n=0&g=0n&fmt=auto?sec=1658942654&t=dcd388bee7e18f3b50e6b48bea66c175"
             },
@@ -61,15 +68,15 @@ const ChatModel: ChatModelType = {
                 msg: [{
                     msg: "出来吃饭",
                     id: "my",
-                    type: "string"
+                    type: "string", read: 1
                 }, {
                     msg: "就这样",
                     id: "obj",
-                    type: "string"
+                    type: "string", read: 1
                 }, {
                     msg: "老地方",
                     id: "my",
-                    type: "string"
+                    type: "string", read: 1
                 }],
                 image: "https://img1.baidu.com/it/u=1007132089,966890415&fm=253&fmt=auto&app=138&f=JPEG?w=500&h=500"
             }
@@ -78,7 +85,7 @@ const ChatModel: ChatModelType = {
         selectImg: '',
         sendState: false,
         peopleList: [
-            { name: "元气酱", userId: "fsdqjqwekhqk", sex: "男", image: "https://gimg2.baidu.com/image_search/src=http%3A%2F%2Fup.enterdesk.com%2Fedpic%2F4d%2F63%2Fbd%2F4d63bd0b3bf8cc9aa0dc3e1111646b1c.jpeg&refer=http%3A%2F%2Fup.enterdesk.com&app=2002&size=f9999,10000&q=a80&n=0&g=0n&fmt=auto?sec=1658942654&t=dcd388bee7e18f3b50e6b48bea66c175" },
+            { name: "大卫", userId: "fsdqjqwekhqk", sex: "男", image: "https://gimg2.baidu.com/image_search/src=http%3A%2F%2Fup.enterdesk.com%2Fedpic%2F4d%2F63%2Fbd%2F4d63bd0b3bf8cc9aa0dc3e1111646b1c.jpeg&refer=http%3A%2F%2Fup.enterdesk.com&app=2002&size=f9999,10000&q=a80&n=0&g=0n&fmt=auto?sec=1658942654&t=dcd388bee7e18f3b50e6b48bea66c175" },
             { name: "王老板", userId: "123dfg", sex: "男", image: "https://img2.baidu.com/it/u=2860188096,638334621&fm=253&fmt=auto&app=138&f=JPEG?w=500&h=500" },
             { name: "可口可乐", userId: "65123f", sex: "男", image: "https://img1.baidu.com/it/u=1960292808,1761809160&fm=253&fmt=auto&app=138&f=JPEG?w=500&h=500" },
             { name: "大杀四方", userId: "fsdergqjkhqk", sex: "男", image: "https://img1.baidu.com/it/u=1007132089,966890415&fm=253&fmt=auto&app=138&f=JPEG?w=500&h=500" },
@@ -100,6 +107,12 @@ const ChatModel: ChatModelType = {
                 }
                 return b
             })
+            state.people.forEach((e) => {
+                if (e.userId == payload) {
+                    e.msg.forEach(b => { b.read = 1 })
+                }
+
+            })
             return {
                 ...state, selectId: payload, selectImg: img
             }
@@ -115,7 +128,7 @@ const ChatModel: ChatModelType = {
             const p = state.people.map(b => {
                 if (b.userId == state.selectId) {
                     b.msg.push({
-                        type: "string", id: "my", msg: payload
+                        type: "string", id: "my", msg: payload, read: 1
                     })
                 }
                 return b

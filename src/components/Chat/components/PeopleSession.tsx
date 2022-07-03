@@ -1,4 +1,5 @@
-import type { ChatModelState } from '@/models/chat'
+import Avatar from '@/components/Avatar'
+import type { ChatModelState, MsgList } from '@/models/chat'
 import { connect } from 'umi'
 
 const People = (props: { chat: ChatModelState }) => {
@@ -12,6 +13,10 @@ const People = (props: { chat: ChatModelState }) => {
         let str = res?.msg[res.msg.length - 1].msg
         return str
     }
+    const isRead = (userId: string) => {
+        const single = chat.people.find((e) => e.userId == userId)
+        return single?.msg.some((e) => e.read == 0)
+    }
     const setPs = (id: string) => {
         dispatch({
             type: 'chat/setSelectId',
@@ -23,19 +28,22 @@ const People = (props: { chat: ChatModelState }) => {
             {chat.people.map((person, index) => (
                 <div
                     key={index}
-                    className="py-4 px-4 flex cursor-pointer"
+                    className="my-4 mx-4 flex cursor-pointer  z-10"
                     onClick={() => setPs(person.userId)}
                 >
-                    <img
-                        className=" h-10 w-10 rounded-full"
-                        src={person.image}
-                        alt=""
-                    />
-                    <div className="ml-3">
+                    <div className="w- 4/12">
+                        <Avatar
+                            red={isRead(person.userId)}
+                            src={person.image}
+                            className={` h-8 w-8 rounded-full`}
+                        />
+                    </div>
+
+                    <div className="ml-3 w-8/12">
                         <p className="text-sm font-medium text-gray-900">
                             {person.name}
                         </p>
-                        <p className="text-sm text-gray-500 truncate ...">
+                        <p className="text-sm  text-gray-500 overflow-hidden truncate">
                             {LastMsg(person.userId)}
                         </p>
                     </div>

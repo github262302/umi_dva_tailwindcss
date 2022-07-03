@@ -1,3 +1,4 @@
+import Avatar from '@/components/Avatar'
 import type { ChatModelState } from '@/models/chat'
 import { connect } from 'umi'
 
@@ -17,7 +18,8 @@ const App = (props: { chat: ChatModelState }) => {
                         })
                     }}
                 >
-                    <img src={e.image} alt={''} className={`h-8 w-8`} />
+                    <Avatar src={e.image} className={`h-8 w-8`} />
+
                     <div className="flex items-center">
                         <div>{e.name}</div>
                     </div>
