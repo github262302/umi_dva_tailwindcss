@@ -1,21 +1,47 @@
-import styles from './Car.scss'
-import { useScroll } from 'ahooks'
-import { useRef, useEffect } from 'react'
+import styles from "./Car.scss";
+import { useScroll } from "ahooks";
+import { useRef, useEffect, useState } from "react";
 const small =
-    'https://tesla-cdn.thron.com/delivery/public/image/tesla/8abede90-db78-460f-8e3e-122265934afc/bvlatuR/std/1928x4096/M3-Homepage-Mobile-CN'
+    "https://tesla-cdn.thron.com/delivery/public/image/tesla/8abede90-db78-460f-8e3e-122265934afc/bvlatuR/std/1928x4096/M3-Homepage-Mobile-CN";
 const big =
-    'https://tesla-cdn.thron.com/delivery/public/image/tesla/c46c5993-c9c2-4938-a18d-7c414a9213ab/bvlatuR/std/4096x2560/M3-Homepage-Desktop-CN'
-export default () => {
-    let scrolled
+    "https://tesla-cdn.thron.com/delivery/public/image/tesla/c46c5993-c9c2-4938-a18d-7c414a9213ab/bvlatuR/std/4096x2560/M3-Homepage-Desktop-CN";
 
-    let FS = scrolled * 1000 - 1
-    document.getElementById('main')?.addEventListener('scroll', (e) => {
-        let scrolled = e.scrollTop / (e.scrollHeight - e.clientHeight)
-    })
+type PropsType = { scrolled: number };
+export default (props: PropsType): React.ReactElement => {
+    const { scrolled } = props;
+    function TitleStyle(): React.CSSProperties {
+        let FS = 40;
+        let FH = 150;
+
+        if (scrolled <= 0.1) {
+            FS = 40 + scrolled * 800;
+        } else {
+            FS = 40 + 0.1 * 800;
+        }
+        if (scrolled > 0.1) {
+            FH = 150 - ((scrolled - 0.1) / 0.1) * 650;
+        } else {
+        }
+        console.log(FH);
+
+        return { fontSize: `${FS}px`, top: FH };
+    }
+
+    function ImgStyle(): React.CSSProperties {
+        let scale = 1;
+        if (scrolled > 0.1) {
+            let n = 1 - 0.1 * ((scrolled - 0.1) / 0.1);
+            scale = n < 0.9 ? 0.9 : n;
+        } else {
+        }
+        return { transform: `scale(${scale})` };
+    }
+    console.log(scrolled, "scrolled");
+
     return (
         <div className={styles.main}>
             <div className={styles.content}>
-                <img className={styles.car} src={big} />
+                <img className={styles.car} src={big} style={ImgStyle()} />
                 <div className="absolute left-1/2 animate-bounce bottom-10">
                     <svg
                         xmlns="http://www.w3.org/2000/svg"
@@ -31,12 +57,12 @@ export default () => {
                     </svg>
                 </div>
                 <div
-                    className="absolute top-20 left-1/2 "
-                    style={{ fontSize: `${FS}px` }}
+                    className={`absolute h-screen w-screen grid justify-items-center ${styles.text}`}
+                    style={TitleStyle()}
                 >
                     Model S
                 </div>
             </div>
         </div>
-    )
-}
+    );
+};

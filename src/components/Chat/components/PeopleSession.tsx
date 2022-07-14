@@ -1,28 +1,28 @@
-import Avatar from '@/components/Avatar'
-import type { ChatModelState, MsgList } from '@/models/chat'
-import { connect } from 'umi'
+import Avatar from "@/components/Avatar";
+import type { ChatModelState, MsgList } from "@/models/chat";
+import { connect } from "umi";
 
 const People = (props: { chat: ChatModelState }) => {
-    console.log(props)
-    const { dispatch, chat } = props
+    console.log(props);
+    const { dispatch, chat } = props;
     const LastMsg = (id: string): string => {
-        let res = chat.people.find((e) => e.userId == id)
+        let res = chat.people.find(e => e.userId == id);
         if (res?.msg.length == 0) {
-            return ''
+            return "";
         }
-        let str = res?.msg[res.msg.length - 1].msg
-        return str
-    }
+        let str = res?.msg[res.msg.length - 1].msg;
+        return str;
+    };
     const isRead = (userId: string) => {
-        const single = chat.people.find((e) => e.userId == userId)
-        return single?.msg.some((e) => e.read == 0)
-    }
+        const single = chat.people.find(e => e.userId == userId);
+        return single?.msg.some(e => e.read == 0);
+    };
     const setPs = (id: string) => {
         dispatch({
-            type: 'chat/setSelectId',
+            type: "chat/setSelectId",
             payload: id,
-        })
-    }
+        });
+    };
     return (
         <div className=" divide-y h-full divide-gray-200 border-solid border-r-2 border-light-blue-500 overflow-hidden ">
             {chat.people.map((person, index) => (
@@ -50,8 +50,8 @@ const People = (props: { chat: ChatModelState }) => {
                 </div>
             ))}
         </div>
-    )
-}
+    );
+};
 export default connect(({ chat }: { chat: ChatModelState }) => ({
     chat,
-}))(People)
+}))(People);

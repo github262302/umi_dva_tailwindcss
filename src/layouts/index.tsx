@@ -1,21 +1,21 @@
-import React from 'react'
-import { Link, Outlet } from 'umi'
-import styles from './index.less'
+import React from "react";
+import { Link, Outlet } from "umi";
+import styles from "./index.less";
 
 export default function Layout() {
-    const data = ['Home', 'Chat', 'Todo']
+    const data = ["Home", "Chat", "Todo"];
     const LinkTo = (num: number) => {
-        console.log('top')
-        const main = document.getElementById('main')
-        const To = (main.scrollHeight / 3) * num
+        console.log("top");
+        const main = document.getElementById("main");
+        const To = (main.scrollHeight / 3) * num;
 
-        main?.scrollTo(0, To)
-    }
+        main?.scrollTo(0, To);
+    };
     return (
         <div className="">
             <div
                 className={
-                    'top-0 w-full fixed bg-transparent flex justify-center h-12 items-center z-50'
+                    "top-0 w-full fixed bg-transparent flex justify-center h-12 items-center z-50"
                 }
             >
                 <ul className=" flex gap-8">
@@ -31,5 +31,5 @@ export default function Layout() {
             </div>
             <Outlet />
         </div>
-    )
+    );
 }

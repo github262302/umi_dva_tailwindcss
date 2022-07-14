@@ -1,21 +1,21 @@
-import Avatar from '@/components/Avatar'
-import type { ChatModelState } from '@/models/chat'
-import { connect } from 'umi'
+import Avatar from "@/components/Avatar";
+import type { ChatModelState } from "@/models/chat";
+import { connect } from "umi";
 
 const App = (props: { chat: ChatModelState }) => {
-    const { chat, dispatch } = props
-    console.log(props, 'propspeopleList')
+    const { chat, dispatch } = props;
+    console.log(props, "propspeopleList");
     return (
         <div className="flex  h-full flex-col gap-4 p-4 border-gray-200 border-r-2 border-solid">
             <Search />
-            {chat.peopleList.map((e) => (
+            {chat.peopleList.map(e => (
                 <div
                     className="flex gap-4 cursor-pointer"
                     onClick={() => {
                         dispatch({
-                            type: 'chat/setSelectPeopleId',
+                            type: "chat/setSelectPeopleId",
                             payload: e.userId,
-                        })
+                        });
                     }}
                 >
                     <Avatar src={e.image} className={`h-8 w-8`} />
@@ -26,11 +26,11 @@ const App = (props: { chat: ChatModelState }) => {
                 </div>
             ))}
         </div>
-    )
-}
+    );
+};
 export default connect(({ chat }: { chat: ChatModelState }) => ({
     chat,
-}))(App)
+}))(App);
 
 const Search = () => {
     return (
@@ -61,5 +61,5 @@ const Search = () => {
                 />
             </div>
         </div>
-    )
-}
+    );
+};

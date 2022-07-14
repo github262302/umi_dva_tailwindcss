@@ -1,14 +1,14 @@
-import { ChatModelState } from '@/models/chat'
-import { useEffect, Component, ReactNode, useState } from 'react'
-import styles from './index.scss'
-import { connect } from 'umi'
-import Message from './components/Message'
-import PeopleSession from './components/PeopleSession'
-import People from './components/People'
-import PeopleInfo from './components/PeopleInfo'
+import { ChatModelState } from "@/models/chat";
+import { useEffect, Component, ReactNode, useState } from "react";
+import styles from "./index.scss";
+import { connect } from "umi";
+import Message from "./components/Message";
+import PeopleSession from "./components/PeopleSession";
+import People from "./components/People";
+import PeopleInfo from "./components/PeopleInfo";
 
 const App = (props: { chat: ChatModelState }) => {
-    const { chat, dispatch, user } = props
+    const { chat, dispatch, user } = props;
     return (
         <div className={`${styles.main} bg-gray-100`}>
             <div
@@ -23,15 +23,15 @@ const App = (props: { chat: ChatModelState }) => {
                             className="text-white cursor-pointer"
                             onClick={() =>
                                 dispatch({
-                                    type: 'chat/setPage',
-                                    payload: 'msg',
+                                    type: "chat/setPage",
+                                    payload: "msg",
                                 })
                             }
                         >
                             <svg
                                 xmlns="http://www.w3.org/2000/svg"
                                 className={`h-8 w-8 ${
-                                    chat.page == 'msg' && 'text-yellow-400'
+                                    chat.page == "msg" && "text-yellow-400"
                                 } `}
                                 fill="none"
                                 viewBox="0 0 24 24"
@@ -49,15 +49,15 @@ const App = (props: { chat: ChatModelState }) => {
                             className="text-white cursor-pointer flex-1"
                             onClick={() =>
                                 dispatch({
-                                    type: 'chat/setPage',
-                                    payload: 'people',
+                                    type: "chat/setPage",
+                                    payload: "people",
                                 })
                             }
                         >
                             <svg
                                 xmlns="http://www.w3.org/2000/svg"
                                 className={`h-8 w-8 ${
-                                    chat.page == 'people' && 'text-yellow-400'
+                                    chat.page == "people" && "text-yellow-400"
                                 } `}
                                 fill="none"
                                 viewBox="0 0 24 24"
@@ -80,7 +80,7 @@ const App = (props: { chat: ChatModelState }) => {
                                 viewBox="0 0 24 24"
                                 stroke="currentColor"
                                 strokeWidth={2}
-                                onClick={() => alert('敬请期待!')}
+                                onClick={() => alert("敬请期待!")}
                             >
                                 <path
                                     strokeLinecap="round"
@@ -92,16 +92,16 @@ const App = (props: { chat: ChatModelState }) => {
                     </ul>
                 </div>
                 <div className="w-1/5">
-                    {chat.page == 'msg' ? <PeopleSession /> : <People />}
+                    {chat.page == "msg" ? <PeopleSession /> : <People />}
                 </div>
                 <div className="flex-1">
-                    {chat.page == 'msg' ? <Message /> : <PeopleInfo />}
+                    {chat.page == "msg" ? <Message /> : <PeopleInfo />}
                 </div>
             </div>
         </div>
-    )
-}
+    );
+};
 export default connect(({ chat, user }: { chat: ChatModelState }) => ({
     chat,
     user,
-}))(App)
+}))(App);

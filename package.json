@@ -1,30 +1,30 @@
 {
-  "private": true,
-  "scripts": {
-    "dev": "umi dev",
-    "build": "umi build",
-    "postinstall": "umi setup",
-    "start": "npm run dev"
-  },
-  "dependencies": {
-    "@headlessui/react": "^1.6.5",
-    "@heroicons/react": "^1.0.6",
-    "@tailwindcss/forms": "^0.5.2",
-    "@umijs/plugin-sass": "^1.1.1",
-    "ahooks": "^3.5.0",
-    "react-spring": "^9.4.5",
-    "tslib": "^2.4.0",
-    "umi": "^4.0.0"
-  },
-  "devDependencies": {
-    "@types/node": "^18.0.0",
-    "@types/react": "^18.0.0",
-    "@types/react-dom": "^18.0.0",
-    "@umijs/plugins": "^4.0.0",
-    "prettier": "^2",
-    "prettier-plugin-organize-imports": "^2.3.4",
-    "prettier-plugin-packagejson": "^2",
-    "tailwindcss": "^3",
-    "typescript": "^4.1.2"
-  }
+    "private": true,
+    "scripts": {
+        "dev": "umi dev",
+        "build": "umi build",
+        "postinstall": "umi setup",
+        "start": "npm run dev"
+    },
+    "dependencies": {
+        "@headlessui/react": "^1.6.5",
+        "@heroicons/react": "^1.0.6",
+        "@tailwindcss/forms": "^0.5.2",
+        "@umijs/plugin-sass": "^1.1.1",
+        "ahooks": "^3.5.0",
+        "react-spring": "^9.4.5",
+        "tslib": "^2.4.0",
+        "umi": "^4.0.0"
+    },
+    "devDependencies": {
+        "@types/node": "^18.0.0",
+        "@types/react": "^18.0.0",
+        "@types/react-dom": "^18.0.0",
+        "@umijs/plugins": "^4.0.0",
+        "prettier": "^2",
+        "prettier-plugin-organize-imports": "^2.3.4",
+        "prettier-plugin-packagejson": "^2",
+        "tailwindcss": "^3",
+        "typescript": "^4.1.2"
+    }
 }

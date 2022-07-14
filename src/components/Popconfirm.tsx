@@ -1,18 +1,18 @@
-import { useState, useEffect } from 'react'
+import { useState, useEffect } from "react";
 
-export default (props) => {
-    const { children, content } = props
-    const [show, setShow] = useState(false)
+export default props => {
+    const { children, content } = props;
+    const [show, setShow] = useState(false);
     const switchShow = () => {
-        console.log('fsd')
-        setShow((e) => !e)
-    }
+        console.log("fsd");
+        setShow(e => !e);
+    };
     // useEffect(() => {}, [show])
     return (
         <div className="relative">
             <div
                 className={`pb-8 p-2 bottom-0 absolute  ${
-                    !show ? 'hidden' : ''
+                    !show ? "hidden" : ""
                 }`}
                 onMouseOut={switchShow}
             >
@@ -20,5 +20,5 @@ export default (props) => {
             </div>
             <div onClick={switchShow}>{children}</div>
         </div>
-    )
-}
+    );
+};

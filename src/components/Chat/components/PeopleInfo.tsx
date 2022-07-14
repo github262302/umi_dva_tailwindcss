@@ -1,27 +1,25 @@
-import type { ChatModelState, PoepleSingle } from '@/models/chat'
-import { connect } from 'umi'
-import Empty from './Empty'
-import { useSpring, animated } from 'react-spring'
+import type { ChatModelState, PoepleSingle } from "@/models/chat";
+import { connect } from "umi";
+import Empty from "./Empty";
+import { useSpring, animated } from "react-spring";
 const App = (props: { chat: ChatModelState }) => {
-    const { chat, dispatch } = props
-    if (chat.selectPeopleId == '') {
-        return <Empty />
+    const { chat, dispatch } = props;
+    if (chat.selectPeopleId == "") {
+        return <Empty />;
     }
     const styles = useSpring({
         loop: false,
         from: { left: 100 },
         to: { left: 0 },
-    })
-    const userInfo = chat.peopleList.find(
-        (e) => e.userId == chat.selectPeopleId,
-    )
+    });
+    const userInfo = chat.peopleList.find(e => e.userId == chat.selectPeopleId);
 
     return (
         <div className="relative">
             <animated.div
                 className="grid place-items-center h-full w-full mt-24"
                 style={{
-                    position: 'absolute',
+                    position: "absolute",
                     ...styles,
                 }}
             >
@@ -45,16 +43,16 @@ const App = (props: { chat: ChatModelState }) => {
                         <div
                             onClick={() => {
                                 dispatch({
-                                    type: 'chat/addMsg',
-                                })
+                                    type: "chat/addMsg",
+                                });
                                 dispatch({
-                                    type: 'chat/setSelectId',
+                                    type: "chat/setSelectId",
                                     payload: chat.selectPeopleId,
-                                })
+                                });
                                 dispatch({
-                                    type: 'chat/setPage',
-                                    payload: 'msg',
-                                })
+                                    type: "chat/setPage",
+                                    payload: "msg",
+                                });
                             }}
                             className="text-white cursor-pointer bg-yellow-400 p-2 w-24 text-center rounded select-none"
                         >
@@ -64,8 +62,8 @@ const App = (props: { chat: ChatModelState }) => {
                 </div>
             </animated.div>
         </div>
-    )
-}
+    );
+};
 export default connect(({ chat }: { chat: ChatModelState }) => ({
     chat,
-}))(App)
+}))(App);

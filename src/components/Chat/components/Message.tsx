@@ -1,55 +1,55 @@
-import type { ChatModelState } from '@/models/chat'
-import { connect } from 'umi'
-import React, { useEffect, useRef, useState } from 'react'
-import { useScroll } from 'ahooks'
-import Empty from './Empty'
-import Popconfirm from '@/components/Popconfirm'
-import styles from './Message.scss'
+import type { ChatModelState } from "@/models/chat";
+import { connect } from "umi";
+import React, { useEffect, useRef, useState } from "react";
+import { useScroll } from "ahooks";
+import Empty from "./Empty";
+import Popconfirm from "@/components/Popconfirm";
+import styles from "./Message.scss";
 
 const Message = (props: { chat: ChatModelState }) => {
-    const [put, setPut] = useState(false)
-    const [emoji, setEmoji] = useState(false)
-    const ref = useRef(null)
-    const { chat, dispatch, user } = props
-    const messageEle = document.getElementById('message')
+    const [put, setPut] = useState(false);
+    const [emoji, setEmoji] = useState(false);
+    const ref = useRef(null);
+    const { chat, dispatch, user } = props;
+    const messageEle = document.getElementById("message");
     const SendMessage = () => {
-        setPut(true)
+        setPut(true);
         setTimeout(() => {
-            const s = document.getElementById('send')
-            if (s.value == '') {
-                setPut(false)
-                return
+            const s = document.getElementById("send");
+            if (s.value == "") {
+                setPut(false);
+                return;
             }
 
             dispatch({
-                type: 'chat/sendMsg',
+                type: "chat/sendMsg",
                 payload: s?.value,
-            })
-            s.value = ''
-            SeeBottom()
-            setPut(false)
-        }, 1000)
-    }
+            });
+            s.value = "";
+            SeeBottom();
+            setPut(false);
+        }, 1000);
+    };
     const SeeBottom = () => {
         setTimeout(() => {
             try {
-                messageEle.scrollTop = messageEle.scrollHeight
+                messageEle.scrollTop = messageEle.scrollHeight;
             } catch {}
-        }, 100)
-    }
-    const msgList = chat.people.filter((e) => e.userId == chat.selectId)
-    const userinfo = chat.people.find((e) => e.userId == chat.selectId)
+        }, 100);
+    };
+    const msgList = chat.people.filter(e => e.userId == chat.selectId);
+    const userinfo = chat.people.find(e => e.userId == chat.selectId);
     const Upload = () => {
-        document.getElementById('upload')?.click()
-    }
+        document.getElementById("upload")?.click();
+    };
     useEffect(() => {
-        console.log('zhixingEffect')
+        console.log("zhixingEffect");
 
-        SeeBottom()
-        return () => {}
-    }, [chat.selectId])
-    if (chat.selectId == '') {
-        return <Empty />
+        SeeBottom();
+        return () => {};
+    }, [chat.selectId]);
+    if (chat.selectId == "") {
+        return <Empty />;
     }
     return (
         <div className="flex h-full flex-col">
@@ -69,13 +69,13 @@ const Message = (props: { chat: ChatModelState }) => {
                 ref={ref}
             >
                 {msgList[0] &&
-                    msgList[0].msg.map((e) => (
+                    msgList[0].msg.map(e => (
                         <div className="flex-none">
                             <div
                                 className={`flex  gap-4 ${
                                     e.id != chat.selectId
-                                        ? 'justify-start flex-row-reverse'
-                                        : ' '
+                                        ? "justify-start flex-row-reverse"
+                                        : " "
                                 }`}
                             >
                                 <div>
@@ -92,8 +92,8 @@ const Message = (props: { chat: ChatModelState }) => {
                                 <div
                                     className={` break-words  max-w-xs align-baseline rounded shadow-xl p-3  ${
                                         e.id != chat.selectId
-                                            ? 'bg-yellow-300'
-                                            : ' '
+                                            ? "bg-yellow-300"
+                                            : " "
                                     }`}
                                 >
                                     {e.msg}
@@ -168,7 +168,7 @@ const Message = (props: { chat: ChatModelState }) => {
                         placeholder="请输入信息"
                         id="send"
                         className="  h-full w-full p-2  "
-                        style={{ resize: 'none', outline: 'none' }}
+                        style={{ resize: "none", outline: "none" }}
                     />
                     <div
                         onClick={SendMessage}
@@ -196,9 +196,9 @@ const Message = (props: { chat: ChatModelState }) => {
                 </div>
             </div>
         </div>
-    )
-}
+    );
+};
 export default connect(({ chat, user }) => ({
     chat,
     user,
-}))(Message)
+}))(Message);

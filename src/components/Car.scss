@@ -1,16 +1,27 @@
-.main{
+.main {
     height: 100vh;
-    
-    position: sticky ;
+    position: sticky;
     top: 0;
 }
 
-.car{
-    object-fit:cover
-    ;height: 100vh;
+.car {
+    object-fit: cover;
+    height: 100vh;
     width: 100vw;
 }
-.content{
-    
- 
+
+.content {
+}
+
+.text {
+    animation: toptext 1s 1;
+}
+
+@keyframes toptext {
+    from {
+        top: 170px;
+    }
+    to {
+        top: 150px;
+    }
 }
