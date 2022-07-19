@@ -3,13 +3,30 @@
     position: sticky;
     top: 0;
 }
-
+.cars {
+    height: 100vh;
+    width: 100vw;
+    display: flex;
+    overflow: hidden;
+    position: relative;
+}
 .car {
     object-fit: cover;
     height: 100vh;
     width: 100vw;
+    position: absolute;
 }
-
+.carOne {
+    @extend .car;
+}
+.carTwo {
+    @extend .car;
+    object-fit: fill;
+}
+.carThree {
+    @extend .car;
+    z-index: 2;
+}
 .content {
 }
 
